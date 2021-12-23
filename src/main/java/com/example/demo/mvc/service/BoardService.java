@@ -15,6 +15,8 @@ public class BoardService {
 	@Autowired
 	private BoardRepository repository;
 	
+	private int boardSeq = 1;
+	
 	public List<Board> getList() {
 		return repository.getList();
 	}
@@ -27,12 +29,13 @@ public class BoardService {
 		
 		Board board = repository.get(parameter.getBoardSeq());
 		if(board == null) {
-			repository.save(board);
+			parameter.setBoardSeq(boardSeq++);
+			repository.save(parameter);
 		} else {
-			repository.update(board);
+			repository.update(parameter);
 		}
 		
-		return board.getBoardSeq();
+		return parameter.getBoardSeq();
 	}
 	
 	
