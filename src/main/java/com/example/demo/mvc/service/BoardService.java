@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.mvc.domain.Board;
+import com.example.demo.mvc.parameter.BoardParameter;
 import com.example.demo.mvc.repository.BoardRepository;
 
 
@@ -15,8 +16,6 @@ public class BoardService {
 	@Autowired
 	private BoardRepository repository;
 	
-	private int boardSeq = 1;
-	
 	public List<Board> getList() {
 		return repository.getList();
 	}
@@ -25,11 +24,10 @@ public class BoardService {
 		return repository.get(boardSeq);
 	}
 
-	public int save(Board parameter) {
+	public int save(BoardParameter parameter) {
 		
 		Board board = repository.get(parameter.getBoardSeq());
 		if(board == null) {
-			parameter.setBoardSeq(boardSeq++);
 			repository.save(parameter);
 		} else {
 			repository.update(parameter);
