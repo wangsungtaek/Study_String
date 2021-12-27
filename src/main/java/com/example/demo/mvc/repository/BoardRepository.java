@@ -1,6 +1,7 @@
 package com.example.demo.mvc.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,7 @@ public interface BoardRepository {
 	Board get(int boardSeq);
 	
 	void save(BoardParameter board);
+	void saveList(Map<String, Object> paramMap);
 	
 	void update(BoardParameter board);
 	
