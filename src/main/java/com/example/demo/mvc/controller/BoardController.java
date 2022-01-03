@@ -20,12 +20,14 @@ import com.example.demo.configuration.http.BaseResponse;
 import com.example.demo.configuration.http.BaseResponseCode;
 import com.example.demo.mvc.domain.Board;
 import com.example.demo.mvc.parameter.BoardParameter;
+import com.example.demo.mvc.parameter.BoardSearchParameter;
 import com.example.demo.mvc.service.BoardService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 
 @RestController
@@ -40,8 +42,8 @@ public class BoardController {
 	
 	@GetMapping
 	@ApiOperation(value = "목록 조회", notes = "게시물 목록을 조회할 수 있습니다.")
-	public BaseResponse<List<Board>> getList() {
-		return new BaseResponse<List<Board>>(boardService.getList());
+	public BaseResponse<List<Board>> getList(@ApiParam BoardSearchParameter parameter) {
+		return new BaseResponse<List<Board>>(boardService.getList(parameter));
 	}
 	
 	@GetMapping("/{boardSeq}")
