@@ -19,6 +19,8 @@ import com.example.demo.configuration.exception.BaseException;
 import com.example.demo.configuration.http.BaseResponse;
 import com.example.demo.configuration.http.BaseResponseCode;
 import com.example.demo.mvc.domain.Board;
+import com.example.demo.mvc.domain.MySQLPageRequest;
+import com.example.demo.mvc.domain.PageRequestParameter;
 import com.example.demo.mvc.parameter.BoardParameter;
 import com.example.demo.mvc.parameter.BoardSearchParameter;
 import com.example.demo.mvc.service.BoardService;
@@ -42,8 +44,11 @@ public class BoardController {
 	
 	@GetMapping
 	@ApiOperation(value = "목록 조회", notes = "게시물 목록을 조회할 수 있습니다.")
-	public BaseResponse<List<Board>> getList(@ApiParam BoardSearchParameter parameter) {
-		return new BaseResponse<List<Board>>(boardService.getList(parameter));
+	public BaseResponse<List<Board>> getList(
+			@ApiParam BoardSearchParameter parameter,
+			@ApiParam MySQLPageRequest pageRequest) {
+		PageRequestParameter<BoardSearchParameter> pageRequestParameter = new PageRequestParameter<BoardSearchParameter>(pageRequest, parameter);
+		return new BaseResponse<List<Board>>(boardService.getList(pageRequestParameter));
 	}
 	
 	@GetMapping("/{boardSeq}")

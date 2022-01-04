@@ -1,16 +1,19 @@
 package com.example.demo.configuration;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.example.demo.configuration.servlet.handler.BaseHandlerInterceptor;
 import com.example.demo.mvc.domain.BaseCodeLabelEnum;
+import com.example.demo.web.MySQLPageRequestHandleMethodArgumentResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.net.MediaType;
@@ -61,5 +64,9 @@ public class WebConfiguration implements WebMvcConfigurer {
 //		registry.addInterceptor(BaseHandlerInterceptor);
 //	}
 
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+		resolvers.add(new MySQLPageRequestHandleMethodArgumentResolver());
+	}
 	
 }
