@@ -24,6 +24,7 @@ import com.example.demo.mvc.domain.PageRequestParameter;
 import com.example.demo.mvc.parameter.BoardParameter;
 import com.example.demo.mvc.parameter.BoardSearchParameter;
 import com.example.demo.mvc.service.BoardService;
+import com.example.demo.web.bind.annotation.RequestConfig;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -67,6 +68,7 @@ public class BoardController {
 	}
 
 	@PutMapping("/save")
+	@RequestConfig
 	@ApiOperation(value = "등록 / 수정 처리", notes = "신규 게시물 저장 및 기존 게시물 업데이트가 가능합니다.")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "boardSeq", value = "게시물 번호", example = "1"),
@@ -139,6 +141,7 @@ public class BoardController {
 	}
 	
 	@DeleteMapping("/{boardSeq}")
+	@RequestConfig
 	@ApiOperation(value = "삭제 처리", notes = "게시물 번호에 해당하는 정보를 삭제합니다.")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "boardSeq", value = "게시물 번호", example = "1")
